@@ -7,9 +7,9 @@ using namespace std;
 void Interface::initialize() {
   char op;
   do {
-    fflush(stdin);
-    Queue expressionQueue;
+    Queue<char> expressionQueue;
     string expression;
+    fflush(stdin);
     cout << "Ingrese la expresion: ";
     getline(cin, expression);
 
@@ -19,18 +19,7 @@ void Interface::initialize() {
       i++;
     }
 
-    receiveInfix(expressionQueue);
-
-    /* while (!infix.isEmpty()) {
-      cout << " a-";
-      cout << " infix: " << infix.dequeue();
-    } */
-
-    // cout << '\n';
-
-    /* while (!expressionQueue.isEmpty()) {
-      cout << " expressionQueue: " << expressionQueue.dequeue();
-    } */
+    setInfix(expressionQueue);
 
     postfix = convertInfix();
 
@@ -38,18 +27,19 @@ void Interface::initialize() {
       cout << postfix.dequeue();
     }
 
-    cout << "\n¿Desea convertir otra expresión? S/N: ";
+    cout << "\n\n¿Desea convertir otra expresión? S/N: ";
     cin >> op;
     op = toupper(op);
   } while (op == 'S');
 }
 
-void Interface::receiveInfix(const Queue& q) {
+void Interface::setInfix(const Queue<char>& q) {
   infix = q;
 }
 
-Queue Interface::convertInfix() {
-  Queue postfix;
+Queue<char> Interface::convertInfix() {
+  
+  Queue<char> postfix;
   while (!infix.isEmpty()) {
     if (infix.getFront() == '(') {
       stack.push(infix.getFront());

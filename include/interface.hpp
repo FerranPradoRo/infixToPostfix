@@ -8,14 +8,14 @@
 
 class Interface {
  private:
-  Queue postfix;
-  Queue infix;
-  Stack stack;
+  Queue<char> postfix;
+  Queue<char> infix;
+  Stack<char> stack;
   std::string result;
  public:
   void initialize();
-  void receiveInfix(const Queue&);
-  Queue convertInfix();
+  void setInfix(const Queue<char>&);
+  Queue<char> convertInfix();
 };
 
 #endif  // __INTERFACE_H__
