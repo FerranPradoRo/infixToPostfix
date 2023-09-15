@@ -3,12 +3,13 @@
 
 #include "exception.hpp"
 
+#define ARRAYSIZE 1024
+
 // Definicion
 
-template <class T, int ARRAYSIZE = 1024>
 class Queue {
  private:
-  T data[ARRAYSIZE];
+  char data[ARRAYSIZE];
   int frontPos;
   int endPos;
 
@@ -18,22 +19,22 @@ class Queue {
   Queue();
   Queue(const Queue&);
 
-  Queue& operator=(const Queue&);
+  Queue& operator= (const Queue&);
 
   bool isEmpty() const;
   bool isFull() const;
 
-  void enqueue(const T&);
+  void enqueue(const char&);
 
-  T dequeue();
+  char dequeue();
 
-  T getFront() const;
+  char getFront() const;
 };
 
 // Implementacion
 
-template <class T, int ARRAYSIZE>
-void Queue<T, ARRAYSIZE>::copyAll(const Queue& s) {
+
+void Queue::copyAll(const Queue& s) {
   int i(0);
   while (i <= s.endPos) {
     data[i] = s.data[i];
@@ -42,34 +43,34 @@ void Queue<T, ARRAYSIZE>::copyAll(const Queue& s) {
   endPos = s.endPos;
 }
 
-template <class T, int ARRAYSIZE>
-Queue<T, ARRAYSIZE>::Queue() : frontPos(0), endPos(ARRAYSIZE - 1) {}
 
-template <class T, int ARRAYSIZE>
-Queue<T, ARRAYSIZE>::Queue(const Queue& q) {
+Queue::Queue() : frontPos(0), endPos(ARRAYSIZE - 1) {}
+
+
+Queue::Queue(const Queue& q) {
   copyAll(q);
 }
 
-template <class T, int ARRAYSIZE>
-Queue<T, ARRAYSIZE>& Queue<T, ARRAYSIZE>::operator=(const Queue& q) {
+
+Queue& Queue::operator=(const Queue& q) {
   copyAll(q);
   return *this;
 }
 
-template <class T, int ARRAYSIZE>
-bool Queue<T, ARRAYSIZE>::isEmpty() const {
+
+bool Queue::isEmpty() const {
   return (frontPos == endPos + 1) || (frontPos == 0 && endPos == ARRAYSIZE - 1);
 }
 
-template <class T, int ARRAYSIZE>
-bool Queue<T, ARRAYSIZE>::isFull() const {
+
+bool Queue::isFull() const {
   return (frontPos == endPos + 2) ||
          (frontPos == ARRAYSIZE - 1 && endPos == 1) ||
          (frontPos == ARRAYSIZE - 2 && endPos == 0);
 }
 
-template <class T, int ARRAYSIZE>
-void Queue<T, ARRAYSIZE>::enqueue(const T& e) {
+
+void Queue::enqueue(const char& e) {
   if (isFull()) {
     throw Exception("Desbordamiento de datos, enqueue");
   }
@@ -77,13 +78,13 @@ void Queue<T, ARRAYSIZE>::enqueue(const T& e) {
   data[endPos = (++endPos == ARRAYSIZE ? 0 : endPos)] = e;
 }
 
-template <class T, int ARRAYSIZE>
-T Queue<T, ARRAYSIZE>::dequeue() {
+
+char Queue::dequeue() {
   if (isEmpty()) {
     throw Exception("Insuficiencia de datos, dequeue");
   }
 
-  T result(data[frontPos]);
+  char result(data[frontPos]);
 
   if (++frontPos == ARRAYSIZE) {
     frontPos = 0;
@@ -92,8 +93,8 @@ T Queue<T, ARRAYSIZE>::dequeue() {
   return result;
 }
 
-template <class T, int ARRAYSIZE>
-T Queue<T, ARRAYSIZE>::getFront() const {
+
+char Queue::getFront() const {
  if(isEmpty()){
   throw Exception("Insuficiencia de datos, getFront");
  }

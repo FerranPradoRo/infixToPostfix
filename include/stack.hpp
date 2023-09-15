@@ -3,12 +3,14 @@
 
 #include "exception.hpp"
 
+#define ARRAYSIZE 1024
+
 // DEFINICION
 
-template <class T, int ARRAYSIZE = 1024>
+
 class Stack {
  private:
-  T data[ARRAYSIZE];
+  char data[ARRAYSIZE];
   int top;
 
   void copyAll(const Stack&);
@@ -22,16 +24,16 @@ class Stack {
   bool isEmpty() const;
   bool isFull() const;
 
-  void push(const T&);  // Elemento por referencia
+  void push(const char&);  // Elemento por referencia
 
-  T pop();
+  char pop();
 
-  T getTop() const;
+  char getTop() const;
 };
 
 // IMPLEMENTACION
-template <class T, int ARRAYSIZE>
-void Stack<T, ARRAYSIZE>::copyAll(const Stack& s) {
+
+void Stack::copyAll(const Stack& s) {
   int i(0);
   while (i <= s.top) {
     data[i] = s.data[i];
@@ -40,38 +42,38 @@ void Stack<T, ARRAYSIZE>::copyAll(const Stack& s) {
   top = s.top;
 }
 
-template <class T, int ARRAYSIZE>
-Stack<T, ARRAYSIZE>::Stack() : top(-1) { }
 
-template <class T, int ARRAYSIZE>
-Stack<T, ARRAYSIZE>::Stack(const Stack& s) {
+Stack::Stack() : top(-1) { }
+
+
+Stack::Stack(const Stack& s) {
   copyAll(s);
 }
 
-/* template <class T, int ARRAYSIZE>
-Stack<T, ARRAYSIZE>::Stack(const Stack& s) {
+/* 
+Stack::Stack(const Stack& s) {
   *this = s
 } */
 
-template <class T, int ARRAYSIZE>
-Stack<T, ARRAYSIZE>& Stack<T, ARRAYSIZE>::operator=(const Stack& s) {
+
+Stack& Stack::operator=(const Stack& s) {
   copyAll(s);
 
   return *this;
 }
 
-template <class T, int ARRAYSIZE>
-bool Stack<T, ARRAYSIZE>::isEmpty() const {
+
+bool Stack::isEmpty() const {
   return top == -1;
 }
 
-template <class T, int ARRAYSIZE>
-bool Stack<T, ARRAYSIZE>::isFull() const {
+
+bool Stack::isFull() const {
   return top == ARRAYSIZE - 1;
 }
 
-template <class T, int ARRAYSIZE>
-void Stack<T, ARRAYSIZE>::push(const T& e) {
+
+void Stack::push(const char& e) {
   if (isFull()) {
     throw Exception("Desbordamiento de datos, push");
   }
@@ -79,8 +81,8 @@ void Stack<T, ARRAYSIZE>::push(const T& e) {
   data[++top] = e;
 }
 
-template <class T, int ARRAYSIZE>
-T Stack<T, ARRAYSIZE>::pop() {
+
+char Stack::pop() {
   if (isEmpty()) {
     throw Exception("Insuficiencia de datos, pop");
   }
@@ -88,8 +90,8 @@ T Stack<T, ARRAYSIZE>::pop() {
   return data[top--];
 }
 
-template <class T, int ARRAYSIZE>
-T Stack<T, ARRAYSIZE>::getTop() const {
+
+char Stack::getTop() const {
   if (isEmpty()) {
     throw Exception("Insuficiencia de datos, getTop");
   }

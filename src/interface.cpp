@@ -8,7 +8,7 @@ void Interface::initialize() {
   char op;
   do {
     fflush(stdin);
-    Queue<char> expressionQueue;
+    Queue expressionQueue;
     string expression;
     cout << "Ingrese la expresion: ";
     getline(cin, expression);
@@ -44,10 +44,12 @@ void Interface::initialize() {
   } while (op == 'S');
 }
 
-void Interface::receiveInfix(const Queue<char>& q) { infix = q; }
+void Interface::receiveInfix(const Queue& q) {
+  infix = q;
+}
 
-Queue<char> Interface::convertInfix() {
-  Queue<char> postfix;
+Queue Interface::convertInfix() {
+  Queue postfix;
   while (!infix.isEmpty()) {
     if (infix.getFront() == '(') {
       stack.push(infix.getFront());
