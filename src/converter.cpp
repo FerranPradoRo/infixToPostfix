@@ -1,14 +1,15 @@
-#include "interface.hpp"
+#include "converter.hpp"
 
 #include <iostream>
 
 using namespace std;
 
-void Interface::initialize() {
+void Converter::initialize() {
   char op;
   do {
     Queue<char> expressionQueue;
     string expression;
+
     fflush(stdin);
     cout << "Ingrese la expresion: ";
     getline(cin, expression);
@@ -21,8 +22,9 @@ void Interface::initialize() {
 
     setInfix(expressionQueue);
 
-    postfix = convertInfix();
+    postfix = getPostfix();
 
+    cout << "Expresión convertida: ";
     while (!postfix.isEmpty()) {
       cout << postfix.dequeue();
     }
@@ -30,14 +32,16 @@ void Interface::initialize() {
     cout << "\n\n¿Desea convertir otra expresión? S/N: ";
     cin >> op;
     op = toupper(op);
+    cout << '\n';
+
   } while (op == 'S');
 }
 
-void Interface::setInfix(const Queue<char>& q) {
+void Converter::setInfix(const Queue<char>& q) {
   infix = q;
 }
 
-Queue<char> Interface::convertInfix() {
+Queue<char> Converter::getPostfix() {
   
   Queue<char> postfix;
   while (!infix.isEmpty()) {

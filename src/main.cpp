@@ -1,13 +1,11 @@
 #include <iostream>
 
-#include "interface.hpp"
+#include "converter.hpp"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Interface interface;
-    interface.initialize();
-
-    getchar();
+    Converter converter;
+    converter.initialize();
 }

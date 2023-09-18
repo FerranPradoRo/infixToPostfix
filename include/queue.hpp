@@ -95,11 +95,11 @@ T Queue<T, ARRAYSIZE>::dequeue() {
 
 template <class T, int ARRAYSIZE>
 T Queue<T, ARRAYSIZE>::getFront() const {
- if(isEmpty()){
-  throw Exception("Insuficiencia de datos, getFront");
- }
+  if (isEmpty()) {
+    throw Exception("Insuficiencia de datos, getFront");
+  }
 
- return data[frontPos];
+  return data[frontPos];
 }
 
 #endif  // __QUEUE_H__

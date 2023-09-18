@@ -41,17 +41,12 @@ void Stack<T, ARRAYSIZE>::copyAll(const Stack& s) {
 }
 
 template <class T, int ARRAYSIZE>
-Stack<T, ARRAYSIZE>::Stack() : top(-1) { }
+Stack<T, ARRAYSIZE>::Stack() : top(-1) {}
 
 template <class T, int ARRAYSIZE>
 Stack<T, ARRAYSIZE>::Stack(const Stack& s) {
   copyAll(s);
 }
-
-/* template <class T, int ARRAYSIZE>
-Stack<T, ARRAYSIZE>::Stack(const Stack& s) {
-  *this = s
-} */
 
 template <class T, int ARRAYSIZE>
 Stack<T, ARRAYSIZE>& Stack<T, ARRAYSIZE>::operator=(const Stack& s) {
@@ -97,4 +92,4 @@ T Stack<T, ARRAYSIZE>::getTop() const {
   return data[top];
 }
 
-#endif // __Stack_HPP__
+#endif  // __Stack_HPP__

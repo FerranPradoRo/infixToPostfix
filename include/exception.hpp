@@ -22,4 +22,4 @@ class Exception : public std::exception {
   virtual const char* what() const noexcept { return msg.c_str(); }
 };
 
-#endif // __EXCEPTION_H__
+#endif  // __EXCEPTION_H__
